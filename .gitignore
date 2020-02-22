@@ -1,0 +1,5 @@
+# local setup stuff
+.vscode
+
+# performance tests logs
+jmeter.log
