@@ -1,10 +1,10 @@
-# blazin"
+# blazin'
 `blazin` is a [Deno](https://deno.land/) web application framework. It is built directly on top of the `std/http` core library.
-It"s syntax is inspired by Express.js.
+It's syntax is inspired by Express.js.
 
 ## Features
 
-The goal of `blazin` is obviously to be blazin" fast, but also be *hella* simple. With simplicity in mind,
+The goal of `blazin` is obviously to be blazin' fast, but also be *hella* simple. With simplicity in mind,
 `blazin` comes with :
 
 * A `Router` component
@@ -16,7 +16,7 @@ The goal of `blazin` is obviously to be blazin" fast, but also be *hella* simple
 Here is the simplest implementation of a hello-world in `blazin`
 
 ```typescript
-import { Blazin } from "../blazin.ts";
+import { Blazin } from "https://raw.githubusercontent.com/delirius325/blazin/master/Blazin.ts";
 
 const blazin = new Blazin(8000)
 
@@ -29,8 +29,8 @@ blazin.router.get("/", res => {
 
 ## Known issues
 
-[] Refactor the way requests are handled
-[] Add more unit tests in `Router_Test.ts`
+- [ ] Refactor the way requests are handled
+- [ ] Add more unit tests in `Router_Test.ts`
 
 ... More to come ... :wink:
 
