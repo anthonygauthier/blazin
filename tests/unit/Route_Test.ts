@@ -1,7 +1,10 @@
 import { assertEquals, unimplemented } from "https://deno.land/std/testing/asserts.ts";
 import { Route } from "../../core/Route.ts";
+import { Response } from "../../core/Response.ts";
 
-const route = new Route("/test", "GET");
+const route = new Route("/test", "GET", (res: Response) => {
+    res.status(200).send({"this":"is a test"})
+});
 
 Deno.test({
     name: "Testing Route construct",

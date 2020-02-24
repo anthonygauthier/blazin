@@ -1,0 +1,16 @@
+version: 2.1 
+orbs:
+  name: circleci/node@1.1.6
+jobs:
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: curl -fsSL https://deno.land/x/install/install.sh | sh
+      - run: npm install artillery
+      - run: export TERM=xterm && bin/runTests.sh
+workflows:
+    ci:
+      jobs:
+        - test
