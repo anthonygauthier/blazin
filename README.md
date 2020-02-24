@@ -9,7 +9,7 @@ The goal of `blazin` is obviously to be blazin' fast, but also be *hella* simple
 
 * A `Router` component
 * A simplified `Response` component
-* A `Logger` to understand what"s going on inside your server 
+* A `Logger` to understand what's going on inside your server 
 * Support for middlewares with the `Middleware` component
 
 ## Example: hello world
@@ -24,12 +24,14 @@ blazin.router.get("/", res => {
     res.status(200)
        .headers({"X-HelloWorld-Header": "hello-world"})
        .send({message: "Hello World!" })
-})
+});
+
+blazin.start();
 ```
 
 ## Known issues
 
-- [ ] Refactor the way requests are handled
+- [ x ] Refactor the way requests are handled
 - [ ] Add more unit tests in `Router_Test.ts`
 
 ... More to come ... :wink:
