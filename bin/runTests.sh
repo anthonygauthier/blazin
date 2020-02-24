@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 clear
 deno tests/unit/Middleware_Test.ts 
 deno tests/unit/Response_Test.ts 
