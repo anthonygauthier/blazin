@@ -15,56 +15,47 @@ export class Router {
     }
     
     public get(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "GET"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "GET", fn));
     }
 
 
     public post(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "POST"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "POST", fn));
     }
 
 
     public put(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "PUT"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "PUT", fn));
     }
 
 
     public head(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "HEAD"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "HEAD", fn));
     }
 
 
     public delete(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "DELETE"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "DELETE", fn));
     }
 
 
     public connect(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "CONNECT"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "CONNECT", fn));
     }
 
 
     public options(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "OPTIONS"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "OPTIONS", fn));
     }
 
 
     public trace(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "TRACE"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "TRACE", fn));
     }
 
 
     public patch(uri: string, fn: (req: Response) => any) {
-        this.routes.push(new Route(uri, "GET"));
-        this.handleRequests(fn);
+        this.routes.push(new Route(uri, "GET", fn));
     }
     
     public favicon() {
@@ -78,31 +69,7 @@ export class Router {
         });
     }
 
-    private async handleRequests(fn: any) {
-        try {
-            for await (const req of this.server) {
-                const res = new Response(req);
-                const conn = res.request.conn.remoteAddr
-                // log request in server console
-                Logger.info(`Path: ${res.request.url}  From: ${conn.transport}://${conn.hostname}:${conn.port}`)
-
-                // fetch the favicon
-                if(res.request.url === "/favicon.ico") {
-                    this.favicon();
-                // process the request if the route exists
-                } else if (this.routes.find(route => route.getUri() == res.request.url && route.getHttpMethod() == res.request.method)) {
-                    // execute the middlewares
-                    for (const middleware of this.middlewares) {
-                        middleware.function(req)
-                    }
-                    fn(res)
-                // send not found if route does not exist
-                } else {
-                    this.notfound(res)
-                }
-            }
-        } catch (e) {
-            console.error(e);
-        }
+    public getRoutes() {
+        return this.routes;
     }
 }
