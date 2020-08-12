@@ -2,4 +2,4 @@
 
 FLAGS="--allow-net"
 
-deno $FLAGS tests/debug/myapp.ts -l debug
+deno run $FLAGS tests/debug/myapp.ts -l debug

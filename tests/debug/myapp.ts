@@ -20,4 +20,4 @@ blazin.router.get("/test2", res => {
        .send({message: "Test2!" })
 });
 
-blazin.start()
+blazin.start();
