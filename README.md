@@ -29,12 +29,29 @@ blazin.router.get("/", res => {
 blazin.start();
 ```
 
-## Known issues
+## Performance benchmark
 
-- [ x ] Refactor the way requests are handled
-- [ ] Add more unit tests in `Router_Test.ts`
+Simple `hello world` server:
 
-... More to come ... :wink:
+See [benchmark.yaml](tests/performance/benchmark.yaml) for the test configuration
+
+```text
+Summary report @ 18:11:01(+0000) 2020-10-14
+  Scenarios launched:  180
+  Scenarios completed: 180
+  Requests completed:  540
+  Mean response/sec: 3.01
+  Response time (msec):
+    min: 0.2
+    max: 50
+    median: 0.5
+    p95: 1
+    p99: 7.9
+  Scenario counts:
+    0: 180 (100%)
+  Codes:
+    200: 540
+```
 
 ## Contributing
 To contribute, please refer to the [CONTRIBUTING.md](./CONTRIBUTING.md) file.

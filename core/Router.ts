@@ -8,68 +8,76 @@ export class Router {
     private routes: Route[];
     public middlewares: Middleware[]
 
-    constructor (server: any) {
+    constructor (server?: any) {
         this.server = server;
         this.routes = new Array<Route>();
         this.middlewares = new Array<Middleware>();
     }
     
-    public get(uri: string, fn: (req: Response) => any) {
+    public get(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "GET", fn));
     }
 
 
-    public post(uri: string, fn: (req: Response) => any) {
+    public post(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "POST", fn));
     }
 
 
-    public put(uri: string, fn: (req: Response) => any) {
+    public put(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "PUT", fn));
     }
 
 
-    public head(uri: string, fn: (req: Response) => any) {
+    public head(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "HEAD", fn));
     }
 
 
-    public delete(uri: string, fn: (req: Response) => any) {
+    public delete(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "DELETE", fn));
     }
 
 
-    public connect(uri: string, fn: (req: Response) => any) {
+    public connect(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "CONNECT", fn));
     }
 
 
-    public options(uri: string, fn: (req: Response) => any) {
+    public options(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "OPTIONS", fn));
     }
 
 
-    public trace(uri: string, fn: (req: Response) => any) {
+    public trace(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "TRACE", fn));
     }
 
 
-    public patch(uri: string, fn: (req: Response) => any) {
+    public patch(uri: string, fn: (req: Response) => any): void {
         this.routes.push(new Route(uri, "GET", fn));
     }
     
-    public favicon() {
+    public favicon(): void {
         Logger.warn("You might want to implement the method Router.favicon()");
     }
     
-    public notfound(res: any) {
+    public notfound(res: any): void {
         res.status(404).send({
             "description": "page not found",
             "status": 404
         });
     }
 
-    public getRoutes() {
+    public getRoutes(): Route[] {
         return this.routes;
+    }
+
+    public mergeRouter(router: Router): void {
+        if (router && router instanceof Router) {
+            for (const route of router.getRoutes()) {
+                this.routes.push(route);
+            }
+        }
     }
 }

@@ -10,4 +10,8 @@ export class Middleware {
     public getName(): string {
         return this.name;
     }
+
+    public execute(): any {
+        this.function
+    }
 }

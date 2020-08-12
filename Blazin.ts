@@ -14,7 +14,7 @@ export class Blazin {
         this.router = new Router(this.server);
     }
 
-    private async handleRequests() {
+    private async handleRequests(): Promise<void> {
         try {
             for await (const req of this.server) {
                 const res = new Response(req);
@@ -49,4 +49,8 @@ export class Blazin {
         this.handleRequests();
         Logger.info(`Blazin fast server started on ${scheme}://${this.server.listener.addr.hostname}:${this.port}`);
     }
-}
+};
+
+export {
+    Router
+};

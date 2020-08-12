@@ -11,5 +11,3 @@ Deno.test({
         assertEquals(router instanceof Router, true);
     }
 });
-
-Deno.runTests()

@@ -26,5 +26,3 @@ Deno.test({
         assertEquals(route.getHttpMethod(), "GET");
     }
 });
-
-Deno.runTests()

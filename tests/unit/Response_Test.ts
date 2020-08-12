@@ -28,5 +28,3 @@ Deno.test({
         assertEquals(res.getStatus(), 200);
     }
 });
-
-Deno.runTests()
