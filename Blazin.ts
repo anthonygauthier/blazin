@@ -49,6 +49,18 @@ export class Blazin {
         this.handleRequests();
         Logger.info(`Blazin fast server started on ${scheme}://${this.server.listener.addr.hostname}:${this.port}`);
     }
+
+    public use(object: any): boolean {
+        switch(object.constructor) {
+            case Router:
+                this.router.mergeRouter(object);
+                Logger.info("Successfully merged router to app router");
+                return true;
+            default: 
+                Logger.warn(`Could not find implementation of .use() for object type of ${typeof object}`);
+                return false;
+        }
+    }
 };
 
 export {
