@@ -1,28 +1,29 @@
 version: 2.1 
 orbs:
   name: circleci/node@1.1.6
+commands: # a reusable command with parameters
+   init:
+      steps:
+         - run: |
+          curl -fsSL https://deno.land/x/install/install.sh | sh
+          export DENO_INSTALL="/home/circleci/.deno"
+          export PATH="$DENO_INSTALL/bin:$PATH"
+          export TERM=xterm
 jobs:
   unit:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: |
-          curl -fsSL https://deno.land/x/install/install.sh | sh
-          export DENO_INSTALL="/home/circleci/.deno"
-          export PATH="$DENO_INSTALL/bin:$PATH"
-          export TERM=xterm
-          bin/runTests.sh
+      - init
+      - run: bin/runTests.sh
   performance:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
+      - init
       - run: |
-          curl -fsSL https://deno.land/x/install/install.sh | sh
-          export DENO_INSTALL="/home/circleci/.deno"
-          export PATH="$DENO_INSTALL/bin:$PATH"
-          export TERM=xterm
           npm install artillery
           bin/benchmark.sh
 workflows:
