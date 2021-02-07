@@ -50,6 +50,10 @@ export class Blazin {
         Logger.info(`Blazin fast server started on ${scheme}://${this.server.listener.addr.hostname}:${this.port}`);
     }
 
+    public stop(): void {
+        this.server.close();
+    }
+
     public use(object: any): boolean {
         switch(object.constructor) {
             case Router:

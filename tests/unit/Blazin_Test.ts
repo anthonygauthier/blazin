@@ -5,12 +5,18 @@ const app = new Blazin(8000)
 
 Deno.test({
     name: "Happy path for Blazin.use()",
-    fn(): void {
+    async fn(): Promise<any> {
         let testRouter = new Router();
         testRouter.get("/", (res) => {
             res.send("Hello world!");
         });
+        app.start();
         assertEquals(app.use(testRouter), true);
+
+        const response = await fetch('http://localhost:8000/');
+        const data = await response.text();
+        assertEquals(data, "Hello world!");
+        app.stop();
     }
 });
 
